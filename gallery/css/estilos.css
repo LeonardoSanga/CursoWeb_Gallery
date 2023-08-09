@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+
+}
+
+.gallery {
+    width: 60rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .5em;
+    background-color: white;
+    padding: .5em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+
+.gallery .image {
+    flex-basis: calc(25% - .5em);
+    flex-grow: 1; /*No caso de exclusão ou adição de imagens, o flex-grow garante uma melhor visualização*/
+    position: relative;
+    overflow: hidden;
+}
+
+image a {
+    text-decoration: none;
+}
+
+.gallery p {
+    background-color: rgba(0, 0, 0, .8);
+    color: white;
+    text-transform: uppercase;
+    padding: 1em;
+    letter-spacing: 2;
+    font-size: .75em;
+    position: absolute;
+    bottom: 0;
+    width: 100%; /*right: 0*/
+    transform: translateY(100%);
+    opacity: .2;
+    transition: all .3s ease-in-out;
+}
+
+.gallery .image:hover p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.image::before {
+    content: '';
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    inset: 0; /*top: 0; right: 0; left: 0; bottom: 0;*/
+    opacity: .5;
+    transition: opacity .5s ease-in-out;
+    pointer-events: none; /*esse elemento impediria o usuário de clicar no link, pois estaria na frente dele*/
+}
+
+.image:hover::before {
+    opacity: 0;
+}
+
+.image img {
+    transform: scale(1);
+    transition: transform .5s ease-in-out;
+}
+
+.image:hover img {
+    transform: scale(1.2); /*img {widht: 100%} -> evita que a imagem pule para fora*/
+}
